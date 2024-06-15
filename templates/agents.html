@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Connected Agents</title>
+</head>
+<body>
+    <h1>Connected Agents</h1>
+    <table border="1">
+        <thead>
+            <tr>
+                <th>IP Address</th>
+                <th>Thread Information</th>
+                <th>Terminal</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for ip, cmd_input, cmd_output, thread_info in agents %}
+            <tr>
+                <td>{{ ip }}</td>
+                <td>{{ thread_info }}</td>
+                <td><a href="/{{ thread_info }}/terminal" target="_blank">Terminal</a></td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    <p><a href="/">Back to Home</a></p>
+</body>
+</html>

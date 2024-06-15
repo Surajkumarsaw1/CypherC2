@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Terminal</title>
+    <script>
+        async function executeCommand(agentname) {
+            const command = document.getElementById('command').value;
+            const response = await fetch(`/${agentname}/execute`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ command: command }),
+            });
+
+            const result = await response.json();
+            document.getElementById('output').innerText = result.output;
+        }
+    </script>
+</head>
+<body>
+    <h1>Terminal for {{ agentname }}</h1>
+    <form onsubmit="event.preventDefault(); executeCommand('{{ agentname }}');">
+        <p>Enter command:</p>
+        <input type="text" id="command" name="command">
+        <input type="submit" value="Execute">
+    </form>
+    <h2>Output:</h2>
+    <pre id="output"></pre>
+
+</body>
+</html>
